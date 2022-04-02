@@ -20,7 +20,8 @@
   )
 
 (defn numMeasurementIncreases [file]
-  (let [measurements (vec (get-resource-file-by-line file))]
-    (find-increases (vec (map-indexed vector measurements)))
+  (let [measurements (vec (get-resource-file-by-line file))
+        increase-list (find-increases (vec (map-indexed vector measurements)))]
+    (reduce + (map (fn [increase] (if increase 1 0)) increase-list))
     )
   )

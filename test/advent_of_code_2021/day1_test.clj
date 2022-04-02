@@ -5,7 +5,4 @@
 
 (deftest day1-sample-test
   (testing "day1-sample-test is incorrect"
-    (let [measurements (numMeasurementIncreases "day1-example-data.txt")]
-      (is (= (count measurements) 10))
-      (is (= (get measurements 0) false))
-      )))
+    (is (= (numMeasurementIncreases "day1-example-data.txt") 7))))
