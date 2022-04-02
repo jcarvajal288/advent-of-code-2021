@@ -4,6 +4,8 @@
             [advent-of-code-2021.util :refer :all]))
 
 (deftest day1-sample-test
-  (testing "number of measurements is incorrect"
-    (let [measurements (get-resource-file-by-line "day1-example-data.txt")]
-      (is (= (numMeasurementIncreases measurements) 7)))))
+  (testing "day1-sample-test is incorrect"
+    (let [measurements (numMeasurementIncreases "day1-example-data.txt")]
+      (is (= (count measurements) 10))
+      (is (= (get measurements 0) false))
+      )))
