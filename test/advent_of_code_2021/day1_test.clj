@@ -5,5 +5,5 @@
 
 (deftest day1-sample-test
   (testing "number of measurements is incorrect"
-    (let [measurements (get-resources-by-line "day1-example-data.txt")]
-    (is (= (numMeasurementIncreases measurements) 7)))))
+    (let [measurements (get-resource-file-by-line "day1-example-data.txt")]
+      (is (= (numMeasurementIncreases measurements) 7)))))
