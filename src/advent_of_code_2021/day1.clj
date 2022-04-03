@@ -25,3 +25,18 @@
     (reduce + (map (fn [increase] (if increase 1 0)) increase-list))
     )
   )
+
+(defn expand-measurement-windows [measurements result]
+  (let [new-result (cons (first measurements) result)]
+    (if (>= (count measurements) 3)
+      (expand-measurement-windows (rest measurements) new-result)
+      result
+      )
+    )
+  )
+
+(defn find-measurement-windows [measurements]
+  (expand-measurement-windows measurements []))
+
+
+
