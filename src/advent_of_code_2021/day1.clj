@@ -1,9 +1,6 @@
 (ns advent-of-code-2021.day1
   (:require [advent-of-code-2021.util :refer :all]))
 
-(defn parse-int [s]
-  (Integer/parseInt (re-find #"\d+" s)))
-
 (defn count-increases [increases]
   (reduce + (map (fn [increase] (if increase 1 0)) increases)))
 
