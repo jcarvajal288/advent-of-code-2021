@@ -25,3 +25,8 @@
 (deftest day1-part2-sample-test
   (testing "day1-part2-sample-test"
     (is (= (num-increases-in-windows "day1-example-data.txt") 5))))
+
+
+(deftest day1-part2-full-test
+  (testing "day1-part2-sample-test"
+    (is (= (num-increases-in-windows "day1-full-data.txt") 1706))))

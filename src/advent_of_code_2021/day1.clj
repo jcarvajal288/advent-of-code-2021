@@ -4,6 +4,9 @@
 (defn parse-int [s]
   (Integer/parseInt (re-find #"\d+" s)))
 
+(defn count-increases [increases]
+  (reduce + (map (fn [increase] (if increase 1 0)) increases)))
+
 (defn determine-increase [measurement measurement-map]
   (let [index (get measurement 0)
         depth (get measurement 1)]
@@ -23,7 +26,7 @@
   (let [raw-measurements (vec (get-resource-file-by-line file))
         measurements (map parse-int raw-measurements)
         increase-list (find-increases (vec (map-indexed vector measurements)))]
-    (reduce + (map (fn [increase] (if increase 1 0)) increase-list))
+    (count-increases increase-list)
     )
   )
 
@@ -43,9 +46,10 @@
   (let [measurements (vec (get-resource-file-by-line file))
         measurement-windows (find-measurement-windows measurements)
         summed-windows (map #(reduce + %) measurement-windows)
-        increase-list (vec (map-indexed vector summed-windows))]
-    (reduce + (map (fn [increase] (if increase 1 0)) increase-list))
-    ))
+        increase-list (find-increases (vec (map-indexed vector summed-windows)))]
+    (count-increases increase-list)
+    )
+  )
 
 
 
