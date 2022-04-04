@@ -9,7 +9,7 @@
         depth (get measurement 1)]
     (if (= index 0)
       false
-      (> (parse-int depth) (parse-int (get (get measurement-map (- index 1)) 1)))))
+      (> depth (get (get measurement-map (- index 1)) 1))))
   )
 
 (defn find-increases [measurement-map]
@@ -20,23 +20,32 @@
   )
 
 (defn numMeasurementIncreases [file]
-  (let [measurements (vec (get-resource-file-by-line file))
+  (let [raw-measurements (vec (get-resource-file-by-line file))
+        measurements (map parse-int raw-measurements)
         increase-list (find-increases (vec (map-indexed vector measurements)))]
     (reduce + (map (fn [increase] (if increase 1 0)) increase-list))
     )
   )
 
 (defn expand-measurement-windows [measurements result]
-  (let [new-result (cons (first measurements) result)]
-    (if (>= (count measurements) 3)
+  (if (>= (count measurements) 3)
+    (let [new-result (conj result (map parse-int (take 3 measurements)))]
       (expand-measurement-windows (rest measurements) new-result)
-      result
       )
+    result
     )
   )
 
 (defn find-measurement-windows [measurements]
   (expand-measurement-windows measurements []))
+
+(defn num-increases-in-windows [file]
+  (let [measurements (vec (get-resource-file-by-line file))
+        measurement-windows (find-measurement-windows measurements)
+        summed-windows (map #(reduce + %) measurement-windows)
+        increase-list (vec (map-indexed vector summed-windows))]
+    (reduce + (map (fn [increase] (if increase 1 0)) increase-list))
+    ))
 
 
 

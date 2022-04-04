@@ -17,7 +17,11 @@
           measurement-windows (find-measurement-windows measurements)]
       (is (= (count measurement-windows) 8))
       (is (coll? (get (vec measurement-windows) 0)))
+      (is (= (get (vec measurement-windows) 0) '(199 200 208)))
       )
     )
   )
 
+(deftest day1-part2-sample-test
+  (testing "day1-part2-sample-test"
+    (is (= (num-increases-in-windows "day1-example-data.txt") 5))))
