@@ -23,3 +23,12 @@
   (testing "day2-full-test"
     (is (= (find-position-product "day2-full-data.txt") 1427868))))
 
+(deftest day2-part2-sample-test
+  (testing "day2-part2-sample-test"
+    (is (= (find-position-product-with-aim "day2-example-data.txt") 900))))
+
+(deftest day2-part2-full-test
+  (testing "day2-part2-full-test"
+    (is (= (find-position-product-with-aim "day2-full-data.txt") 1568138742))))
+
+

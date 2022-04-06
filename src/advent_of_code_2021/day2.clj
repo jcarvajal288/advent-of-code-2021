@@ -42,3 +42,43 @@
     )
   )
 
+(defn move-with-aim
+  ([instructions]
+   (move-with-aim instructions {:dist 0 :depth 0 :aim 0}))
+  ([instructions course]
+   (letfn [(process-instruction [instruction course]
+             (case (first instruction)
+               :forward {:dist  (+ (:dist course) (second instruction))
+                         :depth (+ (:depth course) (* (:aim course) (second instruction)))
+                         :aim   (:aim course)
+                         }
+               :down {:dist  (:dist course)
+                      :depth (:depth course)
+                      :aim   (+ (:aim course) (second instruction))
+                      }
+               :up {:dist  (:dist course)
+                    :depth (:depth course)
+                    :aim   (- (:aim course) (second instruction))
+                    }
+               )
+             )
+           ]
+     (if (empty? instructions)
+       course
+       (recur (rest instructions)
+              (process-instruction (first instructions) course))
+       )
+     )
+   )
+  )
+
+(defn find-position-product-with-aim [file]
+  (let [raw-instructions (vec (get-resource-file-by-line file))
+        instructions (parse-instructions raw-instructions)
+        final-vector (move-with-aim instructions)
+        ]
+    (* (:dist final-vector) (:depth final-vector))
+    )
+  )
+
+
