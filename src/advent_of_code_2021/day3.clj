@@ -20,12 +20,10 @@
 (defn find-power-consumption [filename]
   (let [raw-data (vec (get-resource-file-by-line filename))
         transposed-data (invert-lines raw-data)
-        most-common-bit (Character/digit ^Character (first (first (reverse (sort-by val (frequencies transposed-data))))) 10)
-        least-common-bit (map (fn [bit] (if (= bit 0) 1 0)) most-common-bit)
+        counted-and-sorted-bits (map #(reverse (sort-by val %)) (map frequencies transposed-data))
+        most-common-bits (map #(Character/digit ^Character % 10) (map #(first (first %)) counted-and-sorted-bits))
+        least-common-bits (map (fn [bit] (if (= bit 0) 1 0)) most-common-bits)
         ]
-    (*
-      (map binlist-to-decimal most-common-bit)
-      (map binlist-to-decimal least-common-bit)
-      )
+    (* (binlist-to-decimal most-common-bits) (binlist-to-decimal least-common-bits))
     )
   )
