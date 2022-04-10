@@ -14,7 +14,7 @@
 
 (deftest test-binlist-to-decimal
   (testing "transform list of binary digits to a decimal number"
-    (is (= (binlist-to-decimal '(1 0 1 1 0)) 22))))
+    (is (= (bitlist-to-decimal '(1 0 1 1 0)) 22))))
 
 (deftest day3-part1-sample-test
   (testing "day3 part 1 with sample data"

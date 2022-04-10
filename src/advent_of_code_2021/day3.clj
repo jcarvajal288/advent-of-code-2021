@@ -7,10 +7,11 @@
   (apply map list lines)
   )
 
-(defn binlist-to-decimal [binlist]
-  (let [indexed-list (map-indexed vector (reverse binlist))
+(defn bitlist-to-decimal [bitlist]
+  (let [indexed-list (map-indexed vector (reverse bitlist))
         raise (fn [pair]
-                (let [power (first pair) digit (last pair)]
+                (let [power (first pair)
+                      digit (last pair)]
                   (* digit (expt 2 power))))
         ]
     (reduce + (map raise indexed-list))
@@ -24,6 +25,6 @@
         most-common-bits (map #(Character/digit ^Character % 10) (map #(first (first %)) counted-and-sorted-bits))
         least-common-bits (map (fn [bit] (if (= bit 0) 1 0)) most-common-bits)
         ]
-    (* (binlist-to-decimal most-common-bits) (binlist-to-decimal least-common-bits))
+    (* (bitlist-to-decimal most-common-bits) (bitlist-to-decimal least-common-bits))
     )
   )
