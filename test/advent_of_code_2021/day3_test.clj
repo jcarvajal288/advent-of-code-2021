@@ -8,7 +8,6 @@
   (testing "inverting a list of lists"
     (let [raw-data (vec (get-resource-file-by-line "day3-example-data.txt"))
           inverted-data (invert-lines raw-data)]
-      (println inverted-data)
       (is (= (count inverted-data)) 5)
       (is (= (count (first inverted-data)) 12)))))
 
@@ -24,3 +23,10 @@
   (testing "day3 part 1 with full data"
     (is (= (find-power-consumption "day3-full-data.txt") 841526))))
 
+(deftest day3-part2-sample-test
+  (testing "day3 part 1 with sample data"
+    (is (= (find-life-support-rating "day3-example-data.txt") 230))))
+
+(deftest day3-part2-sample-test
+  (testing "day3 part 1 with full data"
+    (is (= (find-life-support-rating "day3-full-data.txt") 4790390))))
